@@ -1,0 +1,60 @@
+{
+    "color": 16747116,
+    "author": {
+        "name": "Bot50"
+        },
+    "fields": [
+    {
+        "name": "**reddit**",
+        "value": "`/reddit`\nsends a random image from a chosen subreddit"
+        },
+    {
+        "name": "**urban**",
+        "value": "`/urban`\nGets a word's definition from Urban Dictionary"
+        },
+    {
+        "name": "**encode**",
+        "value": "`/encode`\nEncodes text using Caesar method"
+        },
+    {
+        "name": "**decode**",
+        "value": "`/decode`\nEncodes text using Caesar method"
+        },
+    {
+        "name": "**clear**",
+        "value": "`/clear`\nDeletes a specefic amount of messages"
+		},
+    {
+        "name": "**kick**",
+        "value": "`/kick`\nKicks a member"
+        },
+    {
+        "name": "**ban**",
+        "value": "`/ban`\nBans a member"
+        },
+	{
+        "name": "**unban**",
+        "value": "`/unban`\nUnbans a member"
+        },
+    {
+        "name": "**timeout**",
+        "value": "`/timeout`\nmutes / timeouts a member"
+        },
+    {
+        "name": "**unmute**",
+        "value": "`/unmute`\nunmutes / untimeouts a member"
+        },
+	{
+        "name": "**waifu**",
+        "value": "`/waifu`\nSends a random anime girl picture"
+        },
+    {
+        "name": "**help**",
+        "value": "`/help`\nshows this page"
+        },
+    {
+        "name": "**rename**",
+        "value": "`/rename`\nchange bot username"
+        }
+    ]
+}

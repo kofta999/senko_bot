@@ -1,0 +1,155 @@
+Metadata-Version: 2.1
+Name: cord.py
+Version: 1.27a0
+Summary: A Python wrapper for the Discord API| A Continuation Of Discord.py
+Home-page: https://github.com/VincentRPS/cord.py
+Author: VincentRPS
+License: MIT
+Project-URL: Documentation, https://cordpy.readthedocs.io/en/latest/
+Project-URL: Issue tracker, https://github.com/VincentRPS/cord.py/issues
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Topic :: Internet
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Utilities
+Classifier: Typing :: Typed
+Requires-Python: >=3.8.0
+Description-Content-Type: text/x-rst
+License-File: LICENSE
+Requires-Dist: aiohttp (<3.8.0,>=3.6.0)
+Provides-Extra: docs
+Requires-Dist: sphinx (==4.0.2) ; extra == 'docs'
+Requires-Dist: sphinxcontrib-trio (==1.1.2) ; extra == 'docs'
+Requires-Dist: sphinxcontrib-websupport ; extra == 'docs'
+Provides-Extra: speed
+Requires-Dist: orjson (>=3.5.4) ; extra == 'speed'
+Provides-Extra: voice
+Requires-Dist: PyNaCl (<1.5,>=1.3.0) ; extra == 'voice'
+
+cord.py
+==========
+
+.. image:: https://cord.com/api/guilds/336642139381301249/embed.png
+   :target: https://cord.gg/r3sSKJJ
+   :alt: Cord server invite
+.. image:: https://img.shields.io/pypi/v/cord.py.svg
+   :target: https://pypi.python.org/pypi/cord.py
+   :alt: PyPI version info
+.. image:: https://img.shields.io/pypi/pyversions/cord.py.svg
+   :target: https://pypi.python.org/pypi/cord.py
+   :alt: PyPI supported Python versions
+
+A modern, easy to use, feature-rich, and async ready API wrapper for Cord written in Python.
+
+The Future of cord.py
+--------------------------
+
+Please read the `gist <https://gist.github.com/VincentRPS/4a2f62751b9600a31a0d3c78100287f1>`_ for the future of this project. It's been a good one.
+
+Key Features
+-------------
+
+- Modern Pythonic API using ``async`` and ``await``.
+- Proper rate limit handling.
+- Optimised in both speed and memory.
+
+Installing
+----------
+
+**Python 3.8 or higher is required**
+
+To install the library without full voice support, you can just run the following command:
+
+.. code:: sh
+
+    # Linux/macOS
+    python3 -m pip install -U cord.py
+
+    # Windows
+    py -3 -m pip install -U cord.py
+
+Otherwise to get voice support you should run the following command:
+
+.. code:: sh
+
+    # Linux/macOS
+    python3 -m pip install -U "cord.py[voice]"
+
+    # Windows
+    py -3 -m pip install -U cord.py[voice]
+
+
+To install the development version, do the following:
+
+.. code:: sh
+
+    $ git clone https://github.com/VincentRPS/cord.py
+    $ cd cord.py
+    $ python3 -m pip install -U .[voice]
+
+
+Optional Packages
+~~~~~~~~~~~~~~~~~~
+
+* `PyNaCl <https://pypi.org/project/PyNaCl/>`__ (for voice support)
+
+Please note that on Linux installing voice you must install the following packages via your favourite package manager (e.g. ``apt``, ``dnf``, etc) before running the above commands:
+
+* libffi-dev (or ``libffi-devel`` on some systems)
+* python-dev (e.g. ``python3.6-dev`` for Python 3.6)
+
+Quick Example
+--------------
+
+.. code:: py
+
+    import cord
+
+    class MyClient(cord.Client):
+        async def on_ready(self):
+            print('Logged on as', self.user)
+
+        async def on_message(self, message):
+            # don't respond to ourselves
+            if message.author == self.user:
+                return
+
+            if message.content == 'ping':
+                await message.channel.send('pong')
+
+    client = MyClient()
+    client.run('token')
+
+Bot Example
+~~~~~~~~~~~~~
+
+.. code:: py
+
+    import cord
+    from cord.ext import commands
+
+    bot = commands.Bot(command_prefix='>')
+
+    @bot.command()
+    async def ping(ctx):
+        await ctx.send('pong')
+
+    bot.run('token')
+
+You can find more examples in the examples directory.
+
+Links
+------
+
+- `Documentation <https://cordpy.readthedocs.io/en/latest/index.html>`_
+- `Official Cord Server <https://cord.gg/r3sSKJJ>`_
+- `Cord API <https://cord.gg/cord-api>`_
+
+
