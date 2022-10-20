@@ -6,8 +6,6 @@ import os
 import praw
 import discord
 from discord.commands import Option
-from discord.ext import commands
-from discord.ext.commands import MissingPermissions
 from dotenv import load_dotenv
 import aiohttp
 from keep_alive import keep_alive
