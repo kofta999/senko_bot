@@ -5,9 +5,7 @@ import discord
 from discord.commands import Option
 import aiohttp
 import os
-from dotenv import load_dotenv
 
-load_dotenv()
 
 reddit_id = os.environ['reddit_id']
 reddit_secret = os.environ['reddit_secret']
