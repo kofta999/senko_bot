@@ -6,9 +6,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 token = os.environ['token']
-
 bot = discord.Bot()
-bot.load_extension('cogs.reminders')
+bot.load_extensions('cogs')
 
 
 @bot.event
