@@ -12,7 +12,7 @@
         "name": "**urban**",
         "value": "`/urban`\nGets a word's definition from Urban Dictionary"
         },
-    
+
 	{
         "name": "**waifu**",
         "value": "`/waifu`\nSends a random anime girl picture"
@@ -24,6 +24,14 @@
     {
         "name": "**rename**",
         "value": "`/rename`\nchange bot username"
-        }
+        },
+    {
+        "name": "**reminder**",
+        "value": "`/reminder`\nCreates a reminder"
+        },
+    {
+        "name": "**all_reminders**",
+        "value": "`/all_reminders`\nShows all reminders that you've created"
+            }
     ]
 }

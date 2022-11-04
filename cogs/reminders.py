@@ -26,9 +26,12 @@ class ReminderCog(discord.Cog):
     async def reminder(self, ctx, message: Option(str), time: Option(str)):
         '''creates a reminder and sends it to the user's dm'''
 
-        time = to_timedelta(time)
-        now = datetime.utcnow()
-        when = now + time
+        try:
+            time = to_timedelta(time)
+            now = datetime.utcnow()
+            when = now + time
+        except Exception:
+            await ctx.respond("Enter a valid time in format <number>[s|m|h|d|w]")
 
         await db.all_reminders.insert_one({
             'user_id': ctx.author.id,
@@ -37,18 +40,20 @@ class ReminderCog(discord.Cog):
             'done': False,
         })
 
-        await ctx.respond(f"Created the reminder on {when.strftime('%x %X')} (utc)")
+        embed = discord.Embed(color=discord.Color.orange(), type='rich')
+        embed.add_field(name='\u200b', value=f"Created the reminder on {when.strftime('%x %X')} (UTC)", inline=False)
+        await ctx.respond(embed=embed)
 
     @discord.slash_command(description="Shows all reminders that you've created")
     async def all_reminders(self, ctx):
         '''shows all reminders for a user'''
-        s = ''
+        embed = discord.Embed(color=discord.Color.orange(), type='rich')
         reminders = db.all_reminders.find({'done': False, 'user_id': ctx.author.id})
         if not reminders:
             await ctx.repsond("There's no current reminders")
         async for reminder in reminders:
-            s += f"A reminder on {reminder['next_time'].strftime('%x %X')} (utc) with the content:\n{reminder['content']}"
-        await ctx.respond(s)
+            embed.add_field(name="\u200b", value=f"• A reminder on {reminder['next_time'].strftime('%x %X')} (UTC) with the content: **{reminder['content']}**", inline=False)
+        await ctx.respond(embed=embed)
 
 
     @tasks.loop(seconds=5)
