@@ -1,6 +1,7 @@
 # Bot50
 #### Video Demo:  <https://youtu.be/A7DvrhPXsqY>
 #### Description:
+
 >This is the final project of [CS50x](https://cs50.harvard.edu/x/2020/). It is a discord bot that help you manage your server and provide some other tools for users.
 
 ## Introduction 
