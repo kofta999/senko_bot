@@ -2,3 +2,4 @@
 setup.cfg
 cogs/__pycache__/
 __pycache__
+spec.yaml
