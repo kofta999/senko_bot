@@ -1,12 +1,16 @@
+"""This cog holds the logic for working with reminders"""
+
+from datetime import datetime
 import discord
 import motor.motor_asyncio
 import os
 from discord import NotFound
 from discord.ext import tasks
-from datetime import datetime
 from discord.commands import Option
 from dpytools.parsers import to_timedelta
 from dotenv import load_dotenv
+import logging
+
 
 load_dotenv()
 
@@ -15,7 +19,7 @@ db = client.reminders
 
 
 class ReminderCog(discord.Cog):
-    """This cog holds the logic for working with reminders"""
+    """This class holds the logic for working with reminders"""
 
     def __init__(self, bot):
         self.bot = bot
@@ -47,13 +51,19 @@ class ReminderCog(discord.Cog):
     @discord.slash_command(description="Shows all reminders that you've created")
     async def all_reminders(self, ctx):
         '''shows all reminders for a user'''
+        logging.info("beginning of the command")
         embed = discord.Embed(color=discord.Color.orange(), type='rich')
         reminders = db.all_reminders.find({'done': False, 'user_id': ctx.author.id})
-        if not reminders:
-            await ctx.repsond("There's no current reminders")
+        logging.info("Got all reminders")
+
         async for reminder in reminders:
+            logging.info("in try")
             embed.add_field(name="\u200b", value=f"• A reminder on {reminder['next_time'].strftime('%x %X')} (UTC) with the content: **{reminder['content']}**", inline=False)
-        await ctx.respond(embed=embed)
+
+        try:
+            await ctx.respond(embed=embed)
+        except discord.errors.HTTPException:
+            await ctx.respond(f"There's no current reminders for {ctx.author}")
 
 
     @tasks.loop(seconds=5)

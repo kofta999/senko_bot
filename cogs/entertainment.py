@@ -39,7 +39,12 @@ class EntertainmentCog(discord.Cog):
             request = await session.get(f'http://api.urbandictionary.com/v0/define?term={word}')
             testjson = await request.json()
         embed = discord.Embed(title=f"{word}", color=discord.Color.blue(), type='rich')
-        firstdef = testjson["list"][0]
+        try:
+            firstdef = testjson["list"][0]
+        except IndexError:
+            await ctx.respond(f"There's no avaliable defination for {word}")
+            return
+
         embed.add_field(name='Definition', value=firstdef['definition'])
         embed.add_field(name='Example', value=firstdef['example'])
         embed.set_author(name="Defenation of ")

@@ -33,8 +33,11 @@ class ModerationCog(discord.Cog):
     @discord.slash_command(description="Changes the bot's name")
     async def rename(self, ctx, name):
         '''bot name changer'''
-        await discord.user.edit(username=name)
-        await ctx.respond(f"bot usernaem was changed to {name}")
+        if ctx.author == "kofta#1386":
+            await discord.user.edit(username=name)
+            await ctx.respond(f"bot usernaem was changed to {name}")
+        else:
+            await ctx.respond("You can't change the bot's name because you're not kofta lol")
 
 
 def setup(bot):
