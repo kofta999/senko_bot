@@ -1,1 +1,4 @@
 .env
+setup.cfg
+main-cpython-310.pyc
+reminders.cpython-310.pyc
